@@ -1,31 +1,46 @@
-import { useState } from 'react'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { artist } from "./mocks/artist.json";
+import { Artist } from "./components/Artist";
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [showArtist, setShowArtist] = useState(false);
+  const handleSearch = (event) => {
+    event.preventDefault();
+    setShowArtist(true);
+  };
+  const handleReset = (event) => {
+    event.preventDefault();
+    setShowArtist(false);
+  };
   return (
-    <div>
-      <div className="logo">
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div className="container">
+      <h1 className="text-xl font-semibold text-green-600 mb-10">
+        Spotify App
+      </h1>
+      <form className="flex flex-col gap-y-5 border border-white p-5 rounded-lg">
+        <label htmlFor="artistName" className="text-lg">
+          Search for an artist
+        </label>
+        <input type="text" placeholder="Artist name" id="artistName" />
+        <div className="flex gap-2">
+          <button
+            onClick={handleSearch}
+            className="grow bg-green-600 text-black font-semibold rounded-lg"
+          >
+            Search
+          </button>
+          <button
+            onClick={handleReset}
+            className="grow bg-green-600 text-black font-semibold rounded-lg"
+          >
+            Reset
+          </button>
+        </div>
+      </form>
+      {showArtist && <Artist artist={artist} />}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
