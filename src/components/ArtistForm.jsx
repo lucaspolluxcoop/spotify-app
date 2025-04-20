@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { getArtists } from "../services/artists";
 
 export function ArtistForm({ setArtists }) {
   const artistsRef = useRef(null);
@@ -8,17 +9,7 @@ export function ArtistForm({ setArtists }) {
     const artistName = artistsRef.current.value.trim();
     if (!artistName) return;
     const token = JSON.parse(window.localStorage.getItem("token"));
-    const searchedArtist = await fetch(
-      `https://api.spotify.com/v1/search?q=${encodeURIComponent(
-        artistName
-      )}&type=artist`,
-      {
-        headers: {
-          Authorization: `${token.token_type} ${token.access_token}`,
-        },
-      }
-    );
-    const data = await searchedArtist.json();
+    const data = await getArtists(artistName, token);
     setArtists(data.artists.items || []);
   };
 
