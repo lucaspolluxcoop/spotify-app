@@ -8,11 +8,11 @@ function App() {
   const [artists, setArtists] = useState([]);
 
   useEffect(() => {
-    const getToken = async () => {
+    const prefetchData = async () => {
       await getSpotifyToken();
     };
 
-    getToken();
+    prefetchData();
   }, []);
 
   return (
