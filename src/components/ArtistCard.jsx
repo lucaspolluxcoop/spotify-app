@@ -23,12 +23,14 @@ export function ArtistCard({ artist }) {
           ))}
       </div>
       <div className="flex justify-center items-center">
-        <img
-          key={artist.images[0].url}
-          src={artist.images[0].url}
-          alt="Artist"
-          className="w-48 h-48 rounded-lg"
-        />
+        {artist.images && artist.images.length > 0 && (
+          <img
+            key={artist.images[0].url}
+            src={artist.images[0].url}
+            alt="Artist"
+            className="w-48 h-48 rounded-lg"
+          />
+        )}
       </div>
     </div>
   );
