@@ -1,6 +1,6 @@
 export function ArtistCard({ artist }) {
   return (
-    <div className="artist-profile mt-10">
+    <div className="artist-profile my-3">
       <h2 className="text-2xl font-semibold text-green-600 mt-4">
         <a href={artist.external_urls.spotify} target="_blank" rel="noreferrer">
           {artist.name}

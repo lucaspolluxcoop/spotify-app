@@ -1,11 +1,13 @@
 import "./App.css";
-import { ArtistCard } from "./components/ArtistCard";
-import { useState, useEffect } from "react";
+import { ArtistList } from "./components/ArtistList";
+import { useEffect } from "react";
 import { ArtistForm } from "./components/ArtistForm";
 import { getSpotifyToken } from "./utils/spotify";
+import { useArtists } from "./hooks/useArtists";
 
 function App() {
-  const [artists, setArtists] = useState([]);
+  const { setArtists, pagination, setPagination, paginatedArtists } =
+    useArtists();
 
   useEffect(() => {
     const prefetchData = async () => {
@@ -21,8 +23,11 @@ function App() {
         Spotify App
       </h1>
       <ArtistForm setArtists={setArtists} />
-      {artists.length > 0 &&
-        artists.map((artist) => <ArtistCard key={artist.id} artist={artist} />)}
+      <ArtistList
+        artists={paginatedArtists}
+        pagination={pagination}
+        setPagination={setPagination}
+      />
     </div>
   );
 }
