@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { ArtistForm } from "./components/ArtistForm";
 import { getSpotifyToken } from "./utils/spotify";
 import { ArtistProvider } from "./contexts/ArtistContext";
+import { LikedArtistsModal } from "./components/LikedArtistsModal";
 
 function App() {
   useEffect(() => {
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <div className="container">
+      <LikedArtistsModal />
       <h1 className="text-xl font-semibold text-green-600 mb-10">
         Spotify App
       </h1>
