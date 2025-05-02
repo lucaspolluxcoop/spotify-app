@@ -1,36 +1,21 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const LikedArtistsContext = createContext();
 
 export function LikedArtistsProvider({ children }) {
-  const [likedArtistsIds, setLikedArtistsIds] = useState([]);
-  const addLikedArtist = (artist) => {
-    localStorage.setItem(
-      "likedArtistsIds",
-      JSON.stringify([...likedArtistsIds, artist.id])
-    );
-    setLikedArtistsIds((prev) => [...prev, artist.id]);
-  };
-  const removeLikedArtist = (artist) => {
-    localStorage.setItem(
-      "likedArtistsIds",
-      JSON.stringify(likedArtistsIds.filter((id) => id !== artist.id))
-    );
-    setLikedArtistsIds((prev) => prev.filter((id) => id !== artist.id));
-  };
-  const isLikedArtist = (artist) => {
-    return likedArtistsIds.some((id) => id === artist.id);
-  };
+  // Inicializa desde localStorage si existe, si no, array vacío
+  const [likedArtists, setLikedArtists] = useState(() => {
+    const stored = localStorage.getItem("likedArtists");
+    return stored ? JSON.parse(stored) : [];
+  });
+
+  // Sincroniza con localStorage cada vez que likedArtists cambia
+  useEffect(() => {
+    localStorage.setItem("likedArtists", JSON.stringify(likedArtists));
+  }, [likedArtists]);
+
   return (
-    <LikedArtistsContext.Provider
-      value={{
-        likedArtistsIds,
-        setLikedArtistsIds,
-        addLikedArtist,
-        removeLikedArtist,
-        isLikedArtist,
-      }}
-    >
+    <LikedArtistsContext.Provider value={{ likedArtists, setLikedArtists }}>
       {children}
     </LikedArtistsContext.Provider>
   );

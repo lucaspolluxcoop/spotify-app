@@ -2,21 +2,24 @@ import { useLikedArtists } from "../hooks/useLikedArtists";
 import { useState } from "react";
 
 export function LikedArtistsModal() {
-  const { likedArtistsIds } = useLikedArtists();
+  const { likedArtists, removeLikedArtist } = useLikedArtists();
   const [showModal, setShowModal] = useState(false);
-  const handleShowLikedArtists = () => {
-    if (likedArtistsIds.length === 0) return;
+
+  function handleShowLikedArtists() {
+    if (likedArtists.length === 0) return;
     setShowModal(true);
-  };
-  const handleCloseModal = () => {
+  }
+
+  function handleCloseModal() {
     setShowModal(false);
-  };
+  }
+
   return (
     <>
       <div className="absolute top-5 right-5 text-end">
         <span onClick={handleShowLikedArtists} className="cursor-pointer">
           Show liked artists
-          <span className="text-sm ml-2">({likedArtistsIds.length})</span>
+          <span className="text-sm ml-2">({likedArtists.length})</span>
         </span>
       </div>
       {showModal && (
@@ -34,9 +37,27 @@ export function LikedArtistsModal() {
               Liked Artists
             </h2>
             <ul className="space-y-2">
-              {likedArtistsIds.map((artistId) => (
-                <li key={artistId} className="flex items-center gap-2">
-                  <span className="text-sm text-green-600">{artistId}</span>
+              {likedArtists.map((artist) => (
+                <li
+                  key={artist.id}
+                  className="flex items-center justify-between gap-2"
+                >
+                  <a
+                    href={artist.external_urls.spotify}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-green-600 font-semibold"
+                  >
+                    {artist.name}
+                  </a>
+                  <span
+                    onClick={() => {
+                      removeLikedArtist(artist);
+                    }}
+                    className="bg-green-600 text-black font-semibold rounded-lg py-1 px-3 cursor-pointer text-sm"
+                  >
+                    X
+                  </span>
                 </li>
               ))}
             </ul>
