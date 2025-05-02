@@ -1,7 +1,9 @@
 import { useRef } from "react";
 import { getArtists } from "../services/artists";
+import { useArtists } from "../hooks/useArtists";
 
-export function ArtistForm({ setArtists }) {
+export function ArtistForm() {
+  const { setArtists } = useArtists();
   const artistsRef = useRef(null);
 
   const handleSearch = async (event) => {

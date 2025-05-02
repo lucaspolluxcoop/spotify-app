@@ -1,24 +1,26 @@
 import { ArtistCard } from "./ArtistCard";
 import { Pagination } from "./Pagination";
+import { useArtists } from "../hooks/useArtists";
 
-export function ArtistList({ artists, pagination, setPagination }) {
+export function ArtistList() {
+  const { pagination, setPagination, paginatedArtists } = useArtists();
   return (
     <>
-      {artists.length > 0 && (
+      {paginatedArtists.length > 0 && (
         <>
           <Pagination
             pagination={pagination}
             setPagination={setPagination}
-            elements={artists}
+            elements={paginatedArtists}
             className="sm:hidden"
           />
-          {artists.map((artist) => (
+          {paginatedArtists.map((artist) => (
             <ArtistCard key={artist.id} artist={artist} />
           ))}
           <Pagination
             pagination={pagination}
             setPagination={setPagination}
-            elements={artists}
+            elements={paginatedArtists}
           />
         </>
       )}

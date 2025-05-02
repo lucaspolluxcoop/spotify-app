@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { ArtistContext } from "../contexts/ArtistContext";
 
 export function useArtists() {
-  const [artists, setArtists] = useState([]);
-  const [paginatedArtists, setPaginatedArtists] = useState([]);
-  const [pagination, setPagination] = useState({
-    page: 1,
-    perPage: 10,
-    total: 0,
-    prevPage: 1,
-    nextPage: 1,
-  });
+  const {
+    artists,
+    setArtists,
+    pagination,
+    setPagination,
+    paginatedArtists,
+    setPaginatedArtists,
+  } = useContext(ArtistContext);
 
   useEffect(() => {
     setPagination((prev) => ({

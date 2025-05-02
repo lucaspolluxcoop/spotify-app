@@ -16,7 +16,7 @@ export function Pagination({ pagination, setPagination, elements, className }) {
     <>
       <div className={`my-5 ${className || ""}`}>
         <span className="text-lg font-semibold text-green-600">
-          Showing {elements.length} of {pagination.total}
+          Showing {elements.length} of {pagination.total} results
         </span>
         <div className="flex justify-center items-center gap-3 w-full mt-3">
           <span
