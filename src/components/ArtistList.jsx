@@ -1,4 +1,4 @@
-import { ArtistCard } from "./ArtistCard";
+import { ArtistSearchCard } from "./ArtistSearchCard";
 import { Pagination } from "./Pagination";
 import { useArtists } from "../hooks/useArtists";
 
@@ -15,7 +15,7 @@ export function ArtistList() {
             className="sm:hidden"
           />
           {paginatedArtists.map((artist) => (
-            <ArtistCard key={artist.id} artist={artist} />
+            <ArtistSearchCard key={artist.id} artist={artist} />
           ))}
           <Pagination
             pagination={pagination}

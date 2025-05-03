@@ -1,64 +1,39 @@
-import { useState } from "react";
-import { LikeIcon, UnlikeIcon } from "./Icons";
-import { useLikedArtists } from "../hooks/useLikedArtists";
+import { StarIcon } from "../components/Icons";
 
 export function ArtistCard({ artist }) {
-  const { addLikedArtist, removeLikedArtist, isLikedArtist } =
-    useLikedArtists();
-  const [isHovering, setIsHovering] = useState(false);
-  const liked = isLikedArtist(artist);
   return (
-    <div className="artist-profile my-8">
-      <h2 className="text-2xl font-bold text-green-600 flex gap-x-3 items-center">
-        <a href={artist.external_urls.spotify} target="_blank" rel="noreferrer">
-          {artist.name}
-        </a>
-        <small className="flex items-center">
-          <span
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-            onClick={() => {
-              if (liked) {
-                removeLikedArtist(artist);
-              } else {
-                addLikedArtist(artist);
-              }
-            }}
-            className="font-semibold rounded-lg py-1 px-3 cursor-pointer text-sm transition-colors"
-          >
-            {liked && isHovering ? (
-              <UnlikeIcon />
-            ) : (
-              <LikeIcon isLiked={liked} />
-            )}
-          </span>
-        </small>
-      </h2>
-      <small className="ml-2">({artist.followers.total} followers)</small>
-      {artist.description && (
-        <p className="text-lg mt-2">{artist.description}</p>
-      )}
-      <div className="mt-2 grid grid-cols-2 gap-y-2 gap-x-2 sm:flex sm:flex-row sm:gap-2 ">
-        {artist.genres &&
-          artist.genres.length > 0 &&
-          artist.genres.slice(0, 4).map((genre) => (
-            <span
-              className="text-sm bg-green-600 text-black font-semibold rounded-lg py-1 px-2"
-              key={genre}
-            >
-              {genre}
-            </span>
-          ))}
+    <div className="flex flex-col gap-y-2 w-full max-w-2xl mx-auto">
+      <div className="flex items-center justify-center items-end gap-x-3">
+        <div className="text-4xl font-bold text-green-600">{artist.name}</div>
+        <div className="text-md">({artist.followers.total} seguidores)</div>
       </div>
       <div className="flex justify-center items-center">
-        {artist.images && artist.images.length > 0 && (
-          <img
-            key={artist.images[0].url}
-            src={artist.images[0].url}
-            alt="Artist"
-            className="w-48 h-48 rounded-lg"
-          />
-        )}
+        <img src={artist.images[0].url} alt="Artist" />
+      </div>
+      <div className="flex justify-center items-top gap-x-3 mt-3">
+        <div className="flex flex-col gap-y-2 min-w-1/3">
+          <span className="text-lg">Popularity</span>
+          <div className="flex gap-x-1 justify-center items-center">
+            {Array.from({ length: Math.floor(artist.popularity / 20) }).map(
+              (_, index) => (
+                <StarIcon key={index} className="size-4" />
+              )
+            )}
+          </div>
+        </div>
+        <div className="flex flex-col gap-y-2 max-w-2/3">
+          <span className="text-lg">Genres</span>
+          <div className="grid grid-cols-2 gap-x-2 gap-y-1">
+            {artist.genres.map((genre) => (
+              <span
+                className="bg-green-600 text-black text-md font-semibold rounded-lg px-2"
+                key={genre}
+              >
+                {genre}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
