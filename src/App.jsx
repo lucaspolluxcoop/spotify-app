@@ -18,9 +18,7 @@ function App() {
   return (
     <div className="container">
       <LikedArtistsModal />
-      <h1 className="text-xl font-semibold text-green-600 mb-10">
-        Spotify App
-      </h1>
+      <h1 className="text-xl font-semibold text-green-600 my-8">Spotify App</h1>
       <ArtistProvider>
         <ArtistForm />
         <ArtistList />
