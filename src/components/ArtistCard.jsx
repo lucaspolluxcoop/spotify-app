@@ -1,8 +1,12 @@
+import { useState } from "react";
+import { LikeIcon, UnlikeIcon } from "./Icons";
 import { useLikedArtists } from "../hooks/useLikedArtists";
 
 export function ArtistCard({ artist }) {
   const { addLikedArtist, removeLikedArtist, isLikedArtist } =
     useLikedArtists();
+  const [isHovering, setIsHovering] = useState(false);
+  const liked = isLikedArtist(artist);
   return (
     <div className="artist-profile my-8">
       <h2 className="text-2xl font-bold text-green-600 flex gap-x-3 items-center">
@@ -11,16 +15,22 @@ export function ArtistCard({ artist }) {
         </a>
         <small className="flex items-center">
           <span
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
             onClick={() => {
-              if (isLikedArtist(artist)) {
+              if (liked) {
                 removeLikedArtist(artist);
               } else {
                 addLikedArtist(artist);
               }
             }}
-            className="bg-green-600 text-black font-semibold rounded-lg py-1 px-3 cursor-pointer text-sm"
+            className="font-semibold rounded-lg py-1 px-3 cursor-pointer text-sm transition-colors"
           >
-            {isLikedArtist(artist) ? "Unlike" : "Like"}
+            {liked && isHovering ? (
+              <UnlikeIcon />
+            ) : (
+              <LikeIcon isLiked={liked} />
+            )}
           </span>
         </small>
       </h2>

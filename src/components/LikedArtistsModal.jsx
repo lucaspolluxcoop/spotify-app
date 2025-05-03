@@ -1,5 +1,6 @@
 import { useLikedArtists } from "../hooks/useLikedArtists";
 import { useState } from "react";
+import { StarIcon, XMarkIcon } from "../components/Icons";
 
 export function LikedArtistsModal() {
   const { likedArtists, removeLikedArtist } = useLikedArtists();
@@ -17,9 +18,12 @@ export function LikedArtistsModal() {
   return (
     <>
       <div className="absolute top-5 right-5 text-end">
-        <span onClick={handleShowLikedArtists} className="cursor-pointer">
-          Show liked artists
-          <span className="text-sm ml-2">({likedArtists.length})</span>
+        <span
+          onClick={handleShowLikedArtists}
+          className="cursor-pointer flex items-end gap-x-1 text-sm"
+        >
+          <StarIcon className="size-6" />
+          <span className="text-sm">({likedArtists.length})</span>
         </span>
       </div>
       {showModal && (
@@ -27,9 +31,9 @@ export function LikedArtistsModal() {
           <div className="flex justify-end mb-3">
             <span
               onClick={handleCloseModal}
-              className="cursor-pointer text-black font-semibold rounded-lg py-1 px-3 text-right"
+              className="cursor-pointer text-black font-semibold rounded-lg py-1 px-3 text-right text-sm"
             >
-              X
+              <XMarkIcon className="size-4" />
             </span>
           </div>
           <div className="flex flex-col gap-y-2">
@@ -46,7 +50,7 @@ export function LikedArtistsModal() {
                     href={artist.external_urls.spotify}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-green-600 font-semibold"
+                    className="text-green-600 font-semibold text-lg"
                   >
                     {artist.name}
                   </a>
@@ -54,9 +58,9 @@ export function LikedArtistsModal() {
                     onClick={() => {
                       removeLikedArtist(artist);
                     }}
-                    className="bg-green-600 text-black font-semibold rounded-lg py-1 px-3 cursor-pointer text-sm"
+                    className="border border-green-600 text-green-600 font-semibold rounded-lg py-1/2 px-3/4 cursor-pointer text-xs"
                   >
-                    X
+                    <XMarkIcon className="size-2" />
                   </span>
                 </li>
               ))}
