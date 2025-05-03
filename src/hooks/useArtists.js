@@ -22,6 +22,7 @@ export function useArtists() {
     const start = (pagination.page - 1) * pagination.perPage;
     const end = start + pagination.perPage;
     setPaginatedArtists(artists.slice(start, end));
+    window.scrollTo(0, 0);
   }, [pagination]);
 
   return { artists, setArtists, pagination, setPagination, paginatedArtists };
