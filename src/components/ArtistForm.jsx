@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { getArtists } from "../services/artists";
+import { getSearchedArtists } from "../services/searched-artists";
 import { useSearchedArtists } from "../hooks/useSearchedArtists";
 
 export function ArtistForm() {
@@ -10,7 +10,7 @@ export function ArtistForm() {
     event.preventDefault();
     const artistName = artistsRef.current.value.trim();
     if (!artistName) return;
-    const data = await getArtists(artistName);
+    const data = await getSearchedArtists(artistName);
     setSearchedArtists(data.artists.items || []);
   };
 

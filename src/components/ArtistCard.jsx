@@ -5,7 +5,7 @@ export function ArtistCard({ artist }) {
     <div className="flex flex-col gap-y-2 w-full max-w-2xl mx-auto">
       <div className="flex items-center justify-center items-end gap-x-3">
         <div className="text-4xl font-bold text-green-600">{artist.name}</div>
-        <div className="text-md">({artist.followers.total} seguidores)</div>
+        <div className="text-md">({artist.followers.total} followers)</div>
       </div>
       <div className="flex justify-center items-center">
         <img src={artist.images[0].url} alt="Artist" />

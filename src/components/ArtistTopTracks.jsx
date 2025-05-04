@@ -6,7 +6,7 @@ export function ArtistTopTracks({ artistTopTracks }) {
       <h2 className="text-2xl font-semibold text-green-600 mb-3 text-center">
         Top Tracks
       </h2>
-      <div className="overflow-x-scroll max-w-full">
+      <div className="overflow-x-auto max-w-full">
         <div className="min-w-[800px]">
           <div className="grid grid-cols-12 gap-x-3 mb-2 w-full">
             <div className="col-span-1 text-left">Image</div>

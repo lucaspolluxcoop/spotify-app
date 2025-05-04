@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { LikeIcon, UnlikeIcon } from "./Icons";
 import { useLikedArtists } from "../hooks/useLikedArtists";
+import { Link } from "react-router";
 
 export function ArtistSearchCard({ artist }) {
   const { addLikedArtist, removeLikedArtist, isLikedArtist } =
@@ -10,9 +11,9 @@ export function ArtistSearchCard({ artist }) {
   return (
     <div className="artist-profile my-8">
       <h2 className="text-2xl font-bold text-green-600 flex gap-x-3 items-center">
-        <a href={artist.external_urls.spotify} target="_blank" rel="noreferrer">
+        <Link to={`/artist/${artist.id}`} className="text-green-600">
           {artist.name}
-        </a>
+        </Link>
         <small className="flex items-center">
           <span
             onMouseEnter={() => setIsHovering(true)}

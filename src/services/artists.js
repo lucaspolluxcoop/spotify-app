@@ -6,29 +6,21 @@ const opt = {
 };
 const artistUrl = "https://api.spotify.com/v1/artists";
 
-async function getArtists(artistName) {
-  const response = await fetch(
-    `https://api.spotify.com/v1/search?q=${encodeURIComponent(
-      artistName
-    )}&type=artist`,
+async function getArtist(artistId) {
+  const artistResponse = await fetch(`${artistUrl}/${artistId}`, opt);
+  const artist = await artistResponse.json();
+
+  const topTracksResponse = await fetch(
+    `${artistUrl}/${artistId}/top-tracks`,
     opt
   );
-  return await response.json();
+  const topTracks = await topTracksResponse.json();
+  artist.topTracks = topTracks;
+
+  const albumsResponse = await fetch(`${artistUrl}/${artistId}/albums`, opt);
+  const albums = await albumsResponse.json();
+  artist.albums = albums;
+  return artist;
 }
 
-async function getArtist(artistId) {
-  const response = await fetch(`${artistUrl}/${artistId}`, opt);
-  return await response.json();
-}
-
-async function getArtistTopTracks(artistId) {
-  const response = await fetch(`${artistUrl}/${artistId}/top-tracks`, opt);
-  return await response.json();
-}
-
-async function getArtistAlbums(artistId) {
-  const response = await fetch(`${artistUrl}/${artistId}/albums`, opt);
-  return await response.json();
-}
-
-export { getArtists, getArtist, getArtistTopTracks, getArtistAlbums };
+export { getArtist };
