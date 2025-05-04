@@ -1,24 +1,23 @@
 import { useRef } from "react";
 import { getArtists } from "../services/artists";
-import { useArtists } from "../hooks/useArtists";
+import { useSearchedArtists } from "../hooks/useSearchedArtists";
 
 export function ArtistForm() {
-  const { setArtists } = useArtists();
+  const { setSearchedArtists } = useSearchedArtists();
   const artistsRef = useRef(null);
 
   const handleSearch = async (event) => {
     event.preventDefault();
     const artistName = artistsRef.current.value.trim();
     if (!artistName) return;
-    const token = JSON.parse(window.localStorage.getItem("token"));
-    const data = await getArtists(artistName, token);
-    setArtists(data.artists.items || []);
+    const data = await getArtists(artistName);
+    setSearchedArtists(data.artists.items || []);
   };
 
   const handleReset = (event) => {
     event.preventDefault();
     artistsRef.current.value = "";
-    setArtists([]);
+    setSearchedArtists([]);
   };
 
   return (

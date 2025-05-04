@@ -1,9 +1,9 @@
 import { ArtistSearchCard } from "./ArtistSearchCard";
 import { Pagination } from "./Pagination";
-import { useArtists } from "../hooks/useArtists";
+import { useSearchedArtists } from "../hooks/useSearchedArtists";
 
 export function ArtistList() {
-  const { pagination, setPagination, paginatedArtists } = useArtists();
+  const { pagination, setPagination, paginatedArtists } = useSearchedArtists();
   return (
     <>
       {paginatedArtists.length > 0 && (

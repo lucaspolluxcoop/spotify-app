@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const ArtistContext = createContext();
 
 export function ArtistProvider({ children }) {
-  const [artists, setArtists] = useState([]);
+  const [searchedArtists, setSearchedArtists] = useState([]);
   const [paginatedArtists, setPaginatedArtists] = useState([]);
   const [pagination, setPagination] = useState({
     page: 1,
@@ -15,8 +15,8 @@ export function ArtistProvider({ children }) {
   return (
     <ArtistContext.Provider
       value={{
-        artists,
-        setArtists,
+        searchedArtists,
+        setSearchedArtists,
         pagination,
         setPagination,
         paginatedArtists,

@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 import { ArtistContext } from "../contexts/ArtistContext";
 
-export function useArtists() {
+export function useSearchedArtists() {
   const {
-    artists,
-    setArtists,
+    searchedArtists,
+    setSearchedArtists,
     pagination,
     setPagination,
     paginatedArtists,
@@ -14,16 +14,16 @@ export function useArtists() {
   useEffect(() => {
     setPagination((prev) => ({
       ...prev,
-      total: artists.length,
+      total: searchedArtists.length,
     }));
-  }, [artists]);
+  }, [searchedArtists]);
 
   useEffect(() => {
     const start = (pagination.page - 1) * pagination.perPage;
     const end = start + pagination.perPage;
-    setPaginatedArtists(artists.slice(start, end));
+    setPaginatedArtists(searchedArtists.slice(start, end));
     window.scrollTo(0, 0);
   }, [pagination]);
 
-  return { artists, setArtists, pagination, setPagination, paginatedArtists };
+  return { searchedArtists, setSearchedArtists, pagination, setPagination, paginatedArtists };
 }
