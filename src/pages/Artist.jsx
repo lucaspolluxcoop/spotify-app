@@ -3,6 +3,7 @@ import { ArtistAlbums } from "../components/ArtistAlbums";
 import { ArtistTopTracks } from "../components/ArtistTopTracks";
 import { useArtist } from "../hooks/useArtist";
 
+console.log(123);
 export default function Artist() {
   const { artist } = useArtist();
   return (

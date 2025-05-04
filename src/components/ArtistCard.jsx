@@ -8,7 +8,11 @@ export function ArtistCard({ artist }) {
         <div className="text-md">({artist.followers.total} followers)</div>
       </div>
       <div className="flex justify-center items-center">
-        <img src={artist.images[0].url} alt="Artist" />
+        <img
+          src={artist.images[0].url}
+          alt="Artist"
+          className="w-128 h-128 rounded-lg"
+        />
       </div>
       <div className="flex justify-center items-top gap-x-3 mt-3">
         <div className="flex flex-col gap-y-2 min-w-1/3">
